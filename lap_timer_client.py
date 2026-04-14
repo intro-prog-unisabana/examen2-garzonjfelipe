@@ -34,6 +34,31 @@ def fastest_multi_lap(timer, k):
         if current < best:
             best = current
     return best
+def longest_decreasing_streak(timer):
+    times = timer["times"]
+    if not times:
+        return 0
+    best = current = 1
+    for i in range(1, len(times)):
+        if times[i] < times[i-1]:
+            current += 1
+            if current > best:
+                best = current
+        else:
+            best = max(best, current)
+            current = 1
+
+timer = lap_timer.init(10)
+for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
+    timer = lap_timer.add_lap(timer, t)
+    print("numero de vueltas =", lap_timer.count(timer))
+    print("tiempo acumulado =", cumulative_time(timer))
+    print("vuelta mas rapida =", fastest_lap(timer))
+    print("50m mas rapidos =", fastest_multi_lap(timer, 5))
+    print("racha mas larga =", longest_decreasing_streak(timer))
+    print(format_laps(timer))
+
+
 
 
     # TODO: Pedir el nombre del archivo al usuario usando input()
