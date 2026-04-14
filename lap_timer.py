@@ -43,8 +43,13 @@ def longest_decreasing_streak(timer):
     best = 1
     current = 1
     for i in range(1, len(times)):
-
-
+        if times[i] < times[i - 1]:
+            current += 1
+            if current > best:
+                best = current
+        else:
+            current = 1
+    return best
 
 def main():
     # crear un cronometro para el record mundial de 100m de Usain Bolt,
