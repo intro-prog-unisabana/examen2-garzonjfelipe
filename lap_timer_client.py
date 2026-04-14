@@ -3,25 +3,22 @@
 # e imprime la racha decreciente mas larga.
 
 import lap_timer
-from lap_timer import init, add_lap, longest_decreasing_streak, main
 
-nombre = input("Nombre del archivo: ")
-with open(nombre, "r") as f:
-    lineas = f.read().splitlines()
+def main():
+    nombre = input("Nombre del archivo: ")
+    with open(nombre, "r") as f:
+        lineas = f.read().splitlines()
 
-n = int(lineas[0])
-timer = init(n)
+    n = int(lineas[0])
+    timer = lap_timer.init(n)
 
-for t in lineas[1:]:
-    timer = add_lap(timer, float(t))
+    for t in lineas[1:]:
+        timer = lap_timer.add_lap(timer, float(t))
 
-print(longest_decreasing_streak(timer))
-
-
+    print(lap_timer.longest_decreasing_streak(timer))
 
 if __name__ == "__main__":
     main()
-
 
 
 
