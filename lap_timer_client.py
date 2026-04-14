@@ -3,61 +3,21 @@
 # e imprime la racha decreciente mas larga.
 
 import lap_timer
+from lap_timer import init, add_lap, longest_decreasing_streak, main
+
+nombre = input("Nombre del archivo: ")
+with open(nombre, "r") as f:
+    lineas = f.read().splitlines()
+
+n = int(lineas[0])
+timer = init(n)
+
+for t in lineas[1:]:
+    timer = add_lap(timer, float(t))
+
+print(longest_decreasing_streak(timer))
 
 
-def init(max_laps):
-    return {"max": max_laps, "times": [], "total": 0.0}
-
-def add_lap(timer, time):
-    timer["times"].append(time)
-    timer["total"] += time
-    return timer
-
-def count(timer):
-    return len(timer["times"])
-
-def cumulative_time(timer):
-    return timer["total"]
-
-def format_laps(timer):
-    return str(timer["times"])
-
-def fastest_lap(timer):
-    return min(timer["times"])
-
-def fastest_multi_lap(timer, k):
-    times = timer["times"]
-    best = sum(times[:k])
-    for i in range(1, len(times) - k + 1):
-        s = sum(times[i:i + k])
-        if s < best:
-            best = s
-    return best
-
-def longest_decreasing_streak(timer):
-    times = timer["times"]
-    if not times:
-        return 0
-    best = current = 1
-    for i in range(1, len(times)):
-        if times[i] < times[i - 1]:
-            current += 1
-            if current > best:
-                best = current
-        else:
-            current = 1
-    return best
-
-def main():
-    timer = init(10)
-    for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
-        timer = add_lap(timer, t)
-    print("numero de vueltas =", count(timer))
-    print("tiempo acumulado =", cumulative_time(timer))
-    print("vuelta mas rapida =", fastest_lap(timer))
-    print("50m mas rapidos =", fastest_multi_lap(timer, 5))
-    print("racha mas larga =", longest_decreasing_streak(timer))
-    print(format_laps(timer))
 
 if __name__ == "__main__":
     main()
