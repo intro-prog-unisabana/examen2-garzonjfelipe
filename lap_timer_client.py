@@ -5,8 +5,7 @@
 import lap_timer
 
 
-def main():
-  def init(max_laps):
+def init(max_laps):
     return {"max": max_laps, "times": [], "total": 0.0}
 
 def add_lap(timer, time):
@@ -30,33 +29,38 @@ def fastest_multi_lap(timer, k):
     times = timer["times"]
     best = sum(times[:k])
     for i in range(1, len(times) - k + 1):
-        current = sum(times[i:i+k])
-        if current < best:
-            best = current
+        s = sum(times[i:i + k])
+        if s < best:
+            best = s
     return best
+
 def longest_decreasing_streak(timer):
     times = timer["times"]
     if not times:
         return 0
     best = current = 1
     for i in range(1, len(times)):
-        if times[i] < times[i-1]:
+        if times[i] < times[i - 1]:
             current += 1
             if current > best:
                 best = current
         else:
-            best = max(best, current)
             current = 1
+    return best
 
-timer = lap_timer.init(10)
-for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
-    timer = lap_timer.add_lap(timer, t)
-    print("numero de vueltas =", lap_timer.count(timer))
+def main():
+    timer = init(10)
+    for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
+        timer = add_lap(timer, t)
+    print("numero de vueltas =", count(timer))
     print("tiempo acumulado =", cumulative_time(timer))
     print("vuelta mas rapida =", fastest_lap(timer))
     print("50m mas rapidos =", fastest_multi_lap(timer, 5))
     print("racha mas larga =", longest_decreasing_streak(timer))
     print(format_laps(timer))
+
+if __name__ == "__main__":
+    main()
 
 
 
@@ -75,5 +79,4 @@ for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
    
 
 
-if __name__ == "__main__":
-    main()
+
