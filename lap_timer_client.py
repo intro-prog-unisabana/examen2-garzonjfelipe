@@ -36,8 +36,6 @@ def fastest_multi_lap(timer, k):
     return best
 
 
-
-
     # TODO: Pedir el nombre del archivo al usuario usando input()
     
     # TODO: Abrir el archivo y leer el numero de vueltas n
