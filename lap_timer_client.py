@@ -72,7 +72,7 @@ for t in [1.85, 1.02, 0.91, 0.87, 0.85, 0.82, 0.82, 0.82, 0.83, 0.90]:
     # TODO: Imprimir la racha decreciente mas larga
     #       usando lap_timer.longest_decreasing_streak()
     
-    pass
+   
 
 
 if __name__ == "__main__":
