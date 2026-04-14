@@ -20,6 +20,20 @@ def count(timer):
 def cumulative_time(timer):
     return timer["total"]
 
+def format_laps(timer):
+    return str(timer["times"])
+
+def fastest_lap(timer):
+    return min(timer["times"])
+
+def fastest_multi_lap(timer, k):
+    times = timer["times"]
+    best = sum(times[:k])
+    for i in range(1, len(times) - k + 1):
+        current = sum(times[i:i+k])
+        if current < best:
+            best = current
+    return best
 
 
 
