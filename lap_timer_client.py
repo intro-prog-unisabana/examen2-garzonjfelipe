@@ -6,6 +6,24 @@ import lap_timer
 
 
 def main():
+  def init(max_laps):
+    return {"max": max_laps, "times": [], "total": 0.0}
+
+def add_lap(timer, time):
+    timer["times"].append(time)
+    timer["total"] += time
+    return timer
+
+def count(timer):
+    return len(timer["times"])
+
+def cumulative_time(timer):
+    return timer["total"]
+
+
+
+
+
     # TODO: Pedir el nombre del archivo al usuario usando input()
     
     # TODO: Abrir el archivo y leer el numero de vueltas n
